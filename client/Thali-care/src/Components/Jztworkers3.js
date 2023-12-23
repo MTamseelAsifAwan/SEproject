@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import "../Styles/jzt.css";
 import { Link } from "react-router-dom";
-import Navbar from "./Navbar copy";
+import Navbar from "./Navbar copy 2";
 
-function Jztworkers() {
+function Jztworker3() {
   const [jztWorkers, setJztWorkers] = useState([]);
 
   useEffect(() => {
@@ -26,7 +26,6 @@ function Jztworkers() {
     <div className='jaz'    >
  
     
-
 
       
       <table style={{ width: '100%' }}>
@@ -67,4 +66,4 @@ function Jztworkers() {
   );
 };
 
-export default Jztworkers;
+export default Jztworker3;

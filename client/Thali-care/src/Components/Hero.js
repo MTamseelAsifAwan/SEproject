@@ -48,8 +48,12 @@ function Hero() {
             This the platform that help you to save lifes and work for humanity,Thalesemia patient can
              rise request for blood and other persons can register himself as donnor.This platform is 
              under servalance of JZT.
+             <br>
+             </br>
 
           </p>
+          <br>
+          </br>
      <div className="bt1">    <button
             className="text-appointment-btn"
             type="button"
@@ -67,6 +71,8 @@ function Hero() {
       >
         <FontAwesomeIcon icon={faTint} /> Donate Blood
       </button>
+      <br>
+      </br>
       </div> 
           <div className="text-stats">
             <div className="text-stats-container">
@@ -84,6 +90,7 @@ function Hero() {
               <p>JZT Workers</p>
             </div>
           </div>
+       
         </div>
 
         <div className="hero-image-section">

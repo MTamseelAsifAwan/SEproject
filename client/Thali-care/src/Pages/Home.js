@@ -10,14 +10,15 @@ import Footer from "../Components/Footer";
 
 function Home() {
   return (
-    <div className="home-section">
+    <div className="home-section"     style={{ backgroundColor:'transparent' }}>
+    
       <Navbar />
       <Hero />
       <Info />
       <About />
       <BookAppointment />
-      <Reviews />
       <Doctors /> 
+      <Reviews />    
       <Footer />
     </div>
   );

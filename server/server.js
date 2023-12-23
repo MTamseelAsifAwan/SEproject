@@ -39,8 +39,30 @@ app.post('/register', (req, res) => {
     [name, email, number, gender, cnic, dob, address, country, province, city,bloodGroup, age, ], 
         (err, result) => {
             if(result){
-                res.send(result);
-                res.send({message: "!Send"})
+              //  res.send(result);
+                res.send({result,message: "!Send"})
+            }
+        }
+    )
+})
+app.post('/addjzt', (req, res) => {
+    const name = req.body.name;
+    const city = req.body.city;
+    const address = req.body.address;
+    const phone = req.body.phone;
+    const status = req.body.status;
+  /*  const monthlyIncome = req.body.monthlyIncome;
+    const medicalConditions = req.body.medicalConditions;*/
+
+
+
+
+    con.query("INSERT INTO jztworkers (name,city,address,phone,status) VALUES (?,  ?, ?, ?,?)",
+    [name,city,address,phone,status ], 
+        (err, result) => {
+            if(result){
+              //  res.send(result);
+                res.send({result,message: "!Inserted"})
             }
         }
     )
@@ -78,12 +100,35 @@ app.post('/dregister', (req, res) => {
     [name, email, number, gender, cnic, dob, address, country, province, city,bloodGroup, age, ], 
         (err, result) => {
             if(result){
-                res.send(result);
-                res.send({message: "!Your request has been send"})
+                //res.send(result);
+                res.send({result,message: "!Your request has been send"})
             }
         }
     )
 })
+app.post("/deletejzt", (req, res) => {
+    const name = req.body.name; // Retaining 'name' as the parameter name
+
+    // Check if the name is provided
+    if (!name) {
+        res.status(400).send({ message: "Name not provided" });
+        return;
+    }
+
+    // Deleting the user if found by name
+    con.query("DELETE FROM users WHERE name LIKE ?", [`%${name}%`], (deleteErr, deleteResult) => {
+        if (deleteErr) {
+            res.status(500).send({ error: deleteErr.message });
+        } else {
+            if (deleteResult.affectedRows > 0) {
+                res.send({ message: "User deleted successfully" });
+            } else {
+                res.send({ message: "User not found" });
+            }
+        }
+    });
+});
+
 
 app.post("/login", (req, res) => {
     const username = req.body.username;
@@ -97,7 +142,7 @@ app.post("/login", (req, res) => {
                 if(result.length > 0){
                     const user = result[0];
                     res.send(result);
-                    res.send({ message: "Login successful", user });
+                   // res.send({ message: "Login successful", user });
                 } else {
                     res.send({ message: "WRONG USERNAME OR PASSWORD!" });
                 }
@@ -106,8 +151,8 @@ app.post("/login", (req, res) => {
     );
 });
 
-app.use('/api', Router); // You can use '/api' or any other prefix you prefer
+app.use('/api', Router); 
 
 app.listen(3001, () => {
-    console.log("Tamseel running backend server");
+    console.log("Tamseel backend server is running ");
 })

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "../Styles/logins.css"; // Adjust the path according to your file structure
 import Axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar copy";
 
@@ -9,9 +11,10 @@ function Jztworkers2() { // Change the component name to start with an uppercase
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [JztworkersStatus, setJztworkersStatus] = useState("");
-  const [registerStatus, setRegisterStatus] = useState("");
+  //const [registerStatus, setRegisterStatus] = useState("");
+  const navigate = useNavigate();
 
-
+  
   const Jztworkers = (e) => {
     e.preventDefault();
     Axios.post("http://localhost:3001/login", {
@@ -22,8 +25,15 @@ function Jztworkers2() { // Change the component name to start with an uppercase
         setJztworkersStatus(response.data.message);
       }else{
         setJztworkersStatus(response.data[0].email);
+         // Redirect to another page upon successful login
+    //     history.push("/Jztworkers");
+    navigate('/jztworkers3'); // Redirect upon successful login
+
       }
     })
+    .catch((error) => {
+      console.error("Login error: ", error);
+    });
   }
 
   return(
@@ -38,7 +48,7 @@ function Jztworkers2() { // Change the component name to start with an uppercase
           <input className="textInput" type="text" name="username" onChange={(e) => {setUsername(e.target.value)}} placeholder="Enter your Username" required />
           <label htmlFor="password">Password*</label>
           <input className="textInput" type="password" name="password" onChange={(e) => {setPassword(e.target.value)}} placeholder="Enter your Password" required />
-          <input className="button" type="submit" onClick={Jztworkers} value="Jztworkers" />
+          <input className="button" type="submit" onClick={Jztworkers} value="Login" />
           <h1 style={{color: 'red', fontSize: '15px', textAlign: 'center', marginTop: '20px'}}>{JztworkersStatus}</h1>
         </form>
       </div>
